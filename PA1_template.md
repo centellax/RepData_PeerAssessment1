@@ -1,7 +1,6 @@
 pre steps
 =========
 
-    setwd('D:/Users/Centella/Desktop/DS Specialization/no5/repdata_data_activity')
     library(lattice)
     library(timeDate)
 
@@ -16,7 +15,7 @@ What is mean total number of steps taken per day?
     hist_day_steps <- aggregate(steps~date, data=dat, FUN=sum, na.rm=TRUE)
     hist(hist_day_steps$steps,main = "Total Steps per Day",xlab = "Number of Steps")
 
-![](test_files/figure-markdown_strict/unnamed-chunk-2-1.png)
+![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1.png) 
 
     mean(hist_day_steps$steps, na.rm=TRUE) #10766.19
 
@@ -32,8 +31,7 @@ What is the average daily activity pattern?
     five_minutes_average <- aggregate(steps~interval, data=dat, FUN=mean, na.rm=TRUE)
     plot(x = five_minutes_average$interval, y = five_minutes_average$steps, type = "l") 
 
-![](test_files/figure-markdown_strict/unnamed-chunk-3-1.png)
-
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
     max_steps <- max(five_minutes_average$steps)
     for (i in 1:288) 
     {
@@ -64,7 +62,7 @@ Imputing missing values
          ylim=c(0, 30), 
          main="Histogram of the total number of steps taken each day\n(NA replaced by mean value)")
 
-![](test_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
 
     mean(hist2$total) #10766.19
 
@@ -81,4 +79,4 @@ Are there differences in activity patterns between weekdays and weekends?
     dat$day_of_week <- ifelse(isWeekday(dat$date)==TRUE, "weekday", "weekend")
     xyplot(steps ~ interval | day_of_week, layout = c(1, 2), data=dat, type="l")
 
-![](test_files/figure-markdown_strict/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
